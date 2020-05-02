@@ -53,7 +53,7 @@ class Detector(Process):
             print(FPS)
 
 if __name__ == '__main__':
-    d = Detector
+    d = Detector()
     d.start()
     while True:
         print(q.get())

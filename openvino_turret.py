@@ -16,10 +16,10 @@ def find_biggest(boxes):
             biggest = i
     return boxes[biggest]
     
-command_vert(200)
-command_turn(1)
+# command_vert(200)
+# command_turn(1)
 
-pid_x = PID(0.0025, 0.00, 0.0000001, setpoint=0)
+pid_x = PID(0.0025, 0.0005, 0.00001, setpoint=0)
 # pid_y = PID(0.1, 0.1, 0.05, setpoint=0)
 
 pid_x.output_limits = (-1, 1) 

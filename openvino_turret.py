@@ -44,13 +44,15 @@ class Detector(Process):
             start = time.perf_counter()
 
             frame = frame.array
-            _, confidences, boxes = net.detect(frame, confThreshold=0.5)
+            _, confidences, boxes = net.detect(frame, confThreshold=0.6)
             rawCapture.truncate(0)
 
             end = time.perf_counter()
 
             FPS = 1 / (end - start)
             print(FPS)
+
+            q.put(boxes)
 
 if __name__ == '__main__':
     d = Detector()

@@ -54,7 +54,7 @@ class Detector(Process):
 
 if __name__ == '__main__':
     d = Detector
-    d.start
+    d.start()
     while True:
         print(q.get())
 

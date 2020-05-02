@@ -1,6 +1,8 @@
 from openvino_detector import q, Detector
 from turret import *
 import time
+from simple_pid import PID
+
 
 def compute_error(x,y,w,h):
     error_x = 320 - (x + w / 2)

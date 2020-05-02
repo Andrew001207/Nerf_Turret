@@ -11,7 +11,7 @@ def find_biggest(boxes):
     biggest = 0
     for i, box in enumerate(boxes):
         if box[2] * box[3] > boxes[biggest][2]*boxes[biggest][2]:
-        biggest = i
+            biggest = i
     return boxes[biggest]
 
 def check_dir(x1,w):

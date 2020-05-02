@@ -12,8 +12,7 @@ q = Queue()
 
 class Detector(Process):
     def run(self,*args, **kwargs):
-        print (kwargs)
-        verbose = kwargs.verbose
+        verbose = False
 
         net = cv2.dnn_DetectionModel('person-detection-retail-0013.xml',
                             'person-detection-retail-0013.bin')

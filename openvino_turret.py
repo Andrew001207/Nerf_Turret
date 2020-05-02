@@ -51,13 +51,13 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     else:
         command_horiz(128)
     # Draw detected faces on the frame.
-    for confidence, box in zip(list(confidences), boxes):
-        cv2.rectangle(frame, box, color=(0, 255, 0))
+    # for confidence, box in zip(list(confidences), boxes):
+    #     cv2.rectangle(frame, box, color=(0, 255, 0))
 
-    cv2.putText(frame, str(round(FPS,5)), (10,25), cv2.FONT_HERSHEY_SIMPLEX,  
-                   1, (255,255,0), 2, cv2.LINE_AA) 
+    # cv2.putText(frame, str(round(FPS,3)), (10,25), cv2.FONT_HERSHEY_SIMPLEX,  
+    #                1, (255,255,0), 2, cv2.LINE_AA) 
 
-    cv2.imshow("CAM", frame)
+    # cv2.imshow("CAM", frame)
     
     rawCapture.truncate(0)
 
@@ -65,9 +65,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     FPS = 1 / (end - start)
     print(FPS)
-    key = cv2.waitKey(1) & 0xFF
-    if key == ord("q"):
-        break
+    # key = cv2.waitKey(1) & 0xFF
+    # if key == ord("q"):
+    #     break
 cv2.destroyAllWindows()
 # Save the frame to an image file.
 #cv2.imwrite('out.png', frame)

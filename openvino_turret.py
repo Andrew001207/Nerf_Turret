@@ -35,8 +35,8 @@ if __name__ == '__main__':
             continue
         target = find_biggest(boxes)
         errors = compute_error(*target)
-        print(target, errors)
         output = pid_x(errors[0])
+        print(target, errors, output)
 
         
 

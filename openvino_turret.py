@@ -37,6 +37,7 @@ if __name__ == '__main__':
         errors = compute_error(*target)
         output = pid_x(errors[0])
         print(target, errors, output)
+        command_horiz(output)
 
         
 

@@ -19,10 +19,10 @@ def find_biggest(boxes):
 # command_vert(200)
 # command_turn(1)
 
-pid_x = PID(0.0025, 0.0005, 0.00001, setpoint=0)
+pid_x = PID(0.0025, 0.00005, 0.00000, setpoint=0)
 # pid_y = PID(0.1, 0.1, 0.05, setpoint=0)
 
-pid_x.output_limits = (-1, 1) 
+pid_x.output_limits = (-0.5, 0.5) 
 # pid_x.sample_time = 0.025
 
 

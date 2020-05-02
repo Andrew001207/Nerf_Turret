@@ -16,8 +16,8 @@ command_turn(1)
 
 
 if __name__ == '__main__':
-    d = Detector(args=(True,))
-    d.start()
+    d = Detector()
+    d.start(args=(True,))
     while True:
         print(q.get())
 

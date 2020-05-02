@@ -1,19 +1,6 @@
-from multiprocessing import Process
-from multiprocessing import Queue
-
-import cv2 as cv2
-from picamera.array import PiRGBArray
-from picamera import PiCamera
-from imutils.video import VideoStream
-from imutils.video import FPS
+from openvino_detector import q, Detector
 from turret import *
 import time
-# Load the model.
-print('KK')
-net = cv2.dnn_DetectionModel('person-detection-retail-0013.xml',
-                            'person-detection-retail-0013.bin')
-# Specify target device.
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
 
 def check_center(x1,w):
     if x1 + w/6 < 320 < x1 + 5/6*w:
@@ -27,35 +14,9 @@ def check_dir(x1,w):
 command_vert(200)
 command_turn(1)
 
-q = Queue()
-
-class Detector(Process):
-    def run(self):
-        print("[INFO] starting video stream...")
-        camera = PiCamera()
-        camera.resolution = (640, 480)
-        camera.framerate = 32
-        rawCapture = PiRGBArray(camera)
-
-        FPS = 0.0
-
-        for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-
-            start = time.perf_counter()
-
-            frame = frame.array
-            _, confidences, boxes = net.detect(frame, confThreshold=0.6)
-            rawCapture.truncate(0)
-
-            end = time.perf_counter()
-
-            FPS = 1 / (end - start)
-            print(FPS)
-
-            q.put(boxes)
 
 if __name__ == '__main__':
-    d = Detector()
+    d = Detector(args=(True,))
     d.start()
     while True:
         print(q.get())

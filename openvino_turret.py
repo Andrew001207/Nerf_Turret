@@ -52,7 +52,7 @@ class Detector(Process):
             FPS = 1 / (end - start)
             print(FPS)
 
-if name == '__main__':
+if __name__ == '__main__':
     while True:
         print(q.get)
 

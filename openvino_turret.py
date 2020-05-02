@@ -54,7 +54,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     for confidence, box in zip(list(confidences), boxes):
         cv2.rectangle(frame, box, color=(0, 255, 0))
 
-    cv2.putText(frame, str(FPS), (10,10), cv2.FONT_HERSHEY_SIMPLEX,  
+    cv2.putText(frame, str(round(FPS,5)), (10,25), cv2.FONT_HERSHEY_SIMPLEX,  
                    1, (255,255,0), 2, cv2.LINE_AA) 
 
     cv2.imshow("CAM", frame)

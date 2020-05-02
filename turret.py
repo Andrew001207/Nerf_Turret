@@ -14,5 +14,5 @@ def command_vert(value):
 
 def command_horiz(value):
     value = int(value * 128) + 128
-    print(b'C3-%i\n' % value)
+    # print(b'C3-%i\n' % value)
     port.write(b'C3-%i\n' % value)

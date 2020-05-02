@@ -29,10 +29,15 @@ class Detector(Process):
         for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 
             start = time.perf_counter()
+            
 
             frame = frame.array
             _, confidences, boxes = net.detect(frame, confThreshold=0.6)
             rawCapture.truncate(0)
+
+                for confidence, box in zip(list(confidences), boxes):
+            cv.rectangle(frame, box, color=(0, 255, 0))
+            cv.imshow("CAM", frame)
 
             end = time.perf_counter()
 

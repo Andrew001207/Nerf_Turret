@@ -53,8 +53,10 @@ class Detector(Process):
             print(FPS)
 
 if __name__ == '__main__':
+    d = Detector
+    d.start
     while True:
-        print(q.get)
+        print(q.get())
 
 # for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 

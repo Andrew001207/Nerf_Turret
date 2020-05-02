@@ -13,12 +13,15 @@ def find_biggest(boxes):
         if box[2] * box[3] > boxes[biggest][2]*boxes[biggest][2]:
             biggest = i
     return boxes[biggest]
-
-def check_dir(x1,w):
-    return 320 < x1 + w/2
     
 command_vert(200)
 command_turn(1)
+
+pid_x = PID(0.05, 0.00, 0.0000, setpoint=0)
+# pid_y = PID(0.1, 0.1, 0.05, setpoint=0)
+
+pid_x.output_limits = (-1, 1) 
+pid_x.sample_time = 0.025
 
 
 if __name__ == '__main__':
@@ -29,6 +32,9 @@ if __name__ == '__main__':
         if len(boxes) == 0: 
             continue
         target = find_biggest(boxes)
-        print(target, compute_error(*target))
+        errors = compute_error(*target)
+        print(target, errors)
+        output = pid_(errors[0])
+
         
 

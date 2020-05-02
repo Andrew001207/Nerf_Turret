@@ -4,6 +4,7 @@ from picamera import PiCamera
 from imutils.video import VideoStream
 from imutils.video import FPS
 from turret import *
+import time
 # Load the model.
 print('KK')
 net = cv.dnn_DetectionModel('person-detection-retail-0013.xml',
@@ -28,13 +29,14 @@ camera.resolution = (640, 480)
 camera.framerate = 32
 rawCapture = PiRGBArray(camera)
 
+FPS = 0.0
+
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+
+    start = time.perf_counter()
+
     frame = frame.array
-    if frame is None:
-        print("NOFRMAE")
-        continue
-        raise Exception('Image not found!')
-    # Perform an inference.
+
     _, confidences, boxes = net.detect(frame, confThreshold=0.5)
     print(boxes)
     if len(boxes) > 0:
@@ -51,11 +53,21 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # Draw detected faces on the frame.
     for confidence, box in zip(list(confidences), boxes):
         cv.rectangle(frame, box, color=(0, 255, 0))
+
+    cv.putText(frame, str(FPS), (10,10), cv.FONT_HERSHEY_SIMPLEX,  
+                   1, (255,255,0), 2, cv2.LINE_AA) 
+
     cv.imshow("CAM", frame)
-    key = cv.waitKey(1) & 0xFF
-    rawCapture.truncate(0)
-    if key == ord("q"):
-        break
+    # key = cv.waitKey(1) & 0xFF
+    # rawCapture.truncate(0)
+
+    end = time.perf_counter()
+
+    FPS = 1 / (end - start)
+    print(FPS)
+
+    # if key == ord("q"):
+    #     break
 cv.destroyAllWindows()
 # Save the frame to an image file.
 #cv.imwrite('out.png', frame)

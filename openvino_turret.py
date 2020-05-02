@@ -26,6 +26,8 @@ if __name__ == '__main__':
     d.start()
     while True:
         boxes = q.get()
+        if len(boxes) == 0: 
+            continue
         target = find_biggest(boxes)
         print(target, compute_error(*target))
         

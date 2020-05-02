@@ -58,16 +58,16 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                    1, (255,255,0), 2, cv2.LINE_AA) 
 
     cv2.imshow("CAM", frame)
-    # key = cv2.waitKey(1) & 0xFF
+    
     rawCapture.truncate(0)
 
     end = time.perf_counter()
 
     FPS = 1 / (end - start)
     print(FPS)
-
-    # if key == ord("q"):
-    #     break
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord("q"):
+        break
 cv2.destroyAllWindows()
 # Save the frame to an image file.
 #cv2.imwrite('out.png', frame)

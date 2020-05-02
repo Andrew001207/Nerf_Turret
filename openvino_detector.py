@@ -35,8 +35,8 @@ class Detector(Process):
             _, confidences, boxes = net.detect(frame, confThreshold=0.6)
             rawCapture.truncate(0)
             for confidence, box in zip(list(confidences), boxes):
-                cv.rectangle(frame, box, color=(0, 255, 0))
-            cv.imshow("CAM", frame)
+                cv2.rectangle(frame, box, color=(0, 255, 0))
+            cv2.imshow("CAM", frame)
 
             end = time.perf_counter()
 

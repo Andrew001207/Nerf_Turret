@@ -1,4 +1,4 @@
-import cv2 as cv
+import cv2 as cv2
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 from imutils.video import VideoStream
@@ -7,10 +7,10 @@ from turret import *
 import time
 # Load the model.
 print('KK')
-net = cv.dnn_DetectionModel('person-detection-retail-0013.xml',
+net = cv2.dnn_DetectionModel('person-detection-retail-0013.xml',
                             'person-detection-retail-0013.bin')
 # Specify target device.
-net.setPreferableTarget(cv.dnn.DNN_TARGET_MYRIAD)
+net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
 
 def check_center(x1,w):
     if x1 + w/6 < 320 < x1 + 5/6*w:
@@ -52,13 +52,13 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         command_horiz(128)
     # Draw detected faces on the frame.
     for confidence, box in zip(list(confidences), boxes):
-        cv.rectangle(frame, box, color=(0, 255, 0))
+        cv2.rectangle(frame, box, color=(0, 255, 0))
 
-    cv.putText(frame, str(FPS), (10,10), cv.FONT_HERSHEY_SIMPLEX,  
+    cv2.putText(frame, str(FPS), (10,10), cv2.FONT_HERSHEY_SIMPLEX,  
                    1, (255,255,0), 2, cv2.LINE_AA) 
 
-    cv.imshow("CAM", frame)
-    # key = cv.waitKey(1) & 0xFF
+    cv2.imshow("CAM", frame)
+    # key = cv2.waitKey(1) & 0xFF
     # rawCapture.truncate(0)
 
     end = time.perf_counter()
@@ -68,6 +68,6 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     # if key == ord("q"):
     #     break
-cv.destroyAllWindows()
+cv2.destroyAllWindows()
 # Save the frame to an image file.
-#cv.imwrite('out.png', frame)
+#cv2.imwrite('out.png', frame)

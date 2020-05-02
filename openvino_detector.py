@@ -11,7 +11,8 @@ from multiprocessing import Queue
 q = Queue()
 
 class Detector(Process):
-    def run(self,verbose):
+    def run(self,args):
+        print (args)
 
         net = cv2.dnn_DetectionModel('person-detection-retail-0013.xml',
                             'person-detection-retail-0013.bin')

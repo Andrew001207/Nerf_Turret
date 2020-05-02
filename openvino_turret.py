@@ -32,6 +32,7 @@ if __name__ == '__main__':
     while True:
         boxes = q.get()
         if len(boxes) == 0: 
+            command_horiz(0)
             continue
         target = find_biggest(boxes)
         errors = compute_error(*target)
